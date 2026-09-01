@@ -1,60 +1,41 @@
-# CLH Weekly Status
+# Commercial Readiness Weekly Status Report
 
-A single-page status report for the Clinical Learning Hub (CLH) workstreams — migrations, SSO/onboarding, Q3 readiness, and support signals — published as a static site.
+A fillable, sign-off-ready version of the Commercial Readiness Weekly Status Report — the same report that's been circulating as a Word doc, now a single HTML page. This is a separate repo/site from the CLH Weekly Status report.
 
-## Viewing the report
+Pre-filled for **Week of 8/26 – 9/2**, with project statuses and cumulative stats carried forward from the 8/19–8/26 report.
 
-Open `index.html` directly in a browser, or publish it with GitHub Pages (see below) for a shareable link.
+## Using it
 
-## Updating the report
+Open `index.html` in a browser (or the published GitHub Pages link). No install, no login.
 
-The report is one static HTML file with no build step.
+- **Week of** — the two date fields at the top control which draft is loaded/saved. Changing them switches to that week's draft.
+- **Summary** — the one mandatory highlight bullet for the week.
+- **Sign Off** — each of the six names (Kelly, Barry, Tessa, Laura, Andrew, Jan) has a checkbox. Checking it records that person's sign-off with a timestamp, shown next to their name. The counter above shows how many of 6 have signed.
+- **Projects & Status** — the standing project list, grouped the same way as the doc, with a status dropdown (Active / Closed / Cancelled / Paused) per project.
+- **Workstream Updates** — collapsible sections (Gong, CLH/EPM/TTP, ClinicalKey, PSS Products, CS Standup, MISC) with a text field per topic, matching the doc's structure. Migration lists and the ADA file-conversion counters are pre-filled from the last report; percentages recalculate automatically as counts change.
+- **People** — Recruiting & People, Recognition, and the OfficeVibe metric.
 
-1. Open `index.html` in any text editor.
-2. Update the `<span id="genDate">` line in the header with the current date.
-3. Edit the content inside each `<section>` — each status line is a `<div class="item">`. Copy an existing item to add a new one.
-4. Use the tag classes to flag status at a glance:
-   - `tag risk` — red, for blocked/overdue items
-   - `tag watch` — yellow, for items to monitor
-   - `tag ok` — green, for resolved/on-track items
-5. Commit and push. If GitHub Pages is enabled, the live page updates automatically within a minute or two.
+### Saving your work
+
+The page autosaves to your browser's local storage as you type (per week), so refreshing or closing the tab won't lose progress. **Save Draft** saves immediately and shows a timestamp; **Clear Draft** wipes the current week's saved data.
+
+Autosave is per-browser, not shared — it's meant to protect your own in-progress edits, not to sync between teammates. Whoever is the primary editor each week should be the one filling this in and exporting it.
+
+### Publishing the finished report
+
+Once everyone has signed off:
+
+1. Click **Download Markdown** to generate a `.md` file of the completed report (sign-offs, project statuses, and all workstream updates).
+2. Commit it to a `/reports` folder in this repo (e.g. `reports/2026-08-26_to_2026-09-02.md`) so the team has a running, version-controlled archive — replacing the separate Word docs.
+3. Alternatively, use **Print / Export PDF** to generate a clean, form-free printable version for anyone who wants a PDF/paper copy.
 
 ## Publishing with GitHub Pages
 
-1. Push this repo to GitHub.
-2. In the repo, go to **Settings → Pages**.
-3. Under **Build and deployment**, set **Source** to "Deploy from a branch."
-4. Select the `main` branch and `/ (root)` folder, then save.
-5. GitHub will publish the site at `https://<your-username>.github.io/<repo-name>/`.
-
-## Collecting updates
-
-There are two ways for teammates to submit a status update — both feed the same content into `index.html`.
-
-### Option A: `form.html` (fillable page, hosted on GitHub Pages)
-
-A plain HTML form with the same fields as the GitHub Issue Form below. It needs no backend, so it works as a page on GitHub Pages.
-
-1. Open `form.html` and set `GITHUB_OWNER` and `GITHUB_REPO` near the bottom of the file to your repo's owner/name.
-2. Once published, it's linked from the report page via **Submit an update →** in the header, or can be shared directly as `.../form.html`.
-3. Whoever fills it out has two options:
-   - **Copy HTML snippet** — copies a ready-made `<div class="item">` block to paste straight into the matching section of `index.html`.
-   - **File as GitHub issue** — opens a new tab with GitHub's Weekly Status Update issue form pre-filled from what they typed, so the submission is tracked in **Issues** before being folded into the report.
-
-### Option B: GitHub Issue Form directly
-
-`.github/ISSUE_TEMPLATE/weekly-status-update.yml` adds a GitHub Issue Form so teammates can submit updates without using `form.html` at all.
-
-1. Push this repo to GitHub — the form appears automatically under the repo's **Issues → New issue** button (labeled "Weekly Status Update").
-2. Anyone with access to the repo can fill it out: workstream, item title, status, owner, week, update details, and next steps.
-3. Submitted issues are tagged with the `status-update` label, so you can filter **Issues** by that label to see everything submitted for the week.
-4. Fold each submission into `index.html` as a new `<div class="item">` in the matching `<section>`, then close the issue once it's been incorporated.
-5. `.github/ISSUE_TEMPLATE/config.yml` disables blank issues so all submissions go through the structured form; update the placeholder `OWNER/REPO` link in that file once the repo is created.
+1. Push this folder to GitHub.
+2. **Settings → Pages** → set **Source** to "Deploy from a branch," branch `main`, folder `/ (root)` (or wherever this folder lives in the repo).
+3. GitHub publishes it at `https://<your-username>.github.io/<repo-name>/`.
 
 ## Files
 
-- `index.html` — the status report page.
-- `form.html` — fillable form for submitting a status update (no backend required).
-- `.github/ISSUE_TEMPLATE/weekly-status-update.yml` — the GitHub Issue Form teammates can also use directly.
-- `.github/ISSUE_TEMPLATE/config.yml` — issue template settings.
+- `index.html` — the fillable report.
 - `README.md` — this file.
