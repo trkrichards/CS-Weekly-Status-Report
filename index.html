@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLH Weekly Status</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f7f7f5;
+    color: #1a1a1a;
+    padding: 24px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  header { margin-bottom: 24px; }
+  header h1 { font-size: 22px; margin: 0 0 4px 0; color: #1a1a1a; }
+  header .sub { color: #666; font-size: 13px; }
+  section {
+    background: #fff;
+    border: 1px solid #e3e2de;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  section h2 {
+    font-size: 15px;
+    margin: 0 0 12px 0;
+    color: #b5482a;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .item { margin-bottom: 10px; padding-left: 14px; border-left: 3px solid #eee; font-size: 14px; line-height: 1.5; }
+  .item b { color: #1a1a1a; }
+  .item.risk { border-left-color: #d0442c; }
+  .item.done { border-left-color: #3c9a5f; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag.risk { background: #fbe4de; color: #a3341c; }
+  .tag.watch { background: #fdf1d6; color: #93690a; }
+  .tag.ok { background: #e0f2e6; color: #206b3e; }
+  ul.actions { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7; }
+  .muted { color: #888; font-size: 13px; }
+  footer { text-align: center; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Clinical Learning Hub (CLH) — Weekly Status</h1>
+    <div class="sub">Tessa Richards, Customer Readiness Manager · <span id="genDate">Generated Aug 17, 2026</span></div>
+  </header>
+
+  <section>
+    <h2>CLH Migrations</h2>
+    <div class="item"><b>National Institutes of Health — migration executed</b><span class="tag watch">In Progress</span><br>
+      Aug 17 migration run completed org structure, skills, notes, checklists, media/illustrations, and facilities/departments. Binary images and custom content are still being migrated — Mike Dwyer to update the group when complete. Related EPM department cleanup (NIH-CCND → Nursing Professional Practice) was finished Aug 14, and the team confirmed a separate CLH assignment bug was unrelated to the migration (assignments are not migrated; only modules are).</div>
+    <div class="item risk"><b>Sandia Employee Health — data migration issue</b><span class="tag risk">Open</span><br>
+      Custom skill notes/images were never included in the migration script; no update this week. Marianna Petrovich still owns the script fix, Stephen Picone to confirm target table locations.</div>
+    <div class="item risk"><b>Chatham-Kent Health Alliance — migration request</b><span class="tag risk">Active</span><br>
+      Loader/logging failure from two weeks ago remains unresolved; no new update this week from S. Picone / G. Smith.</div>
+    <div class="item risk"><b>Top 10 EPM + Connect clients — migration strategy</b><span class="tag risk">Blocked on Product</span><br>
+      Finance and Customer Success (Laura Cantrell, Teia Stone, Kelly Phillips) are scoping a migration plan for the largest clients running both EPM and Connect. Product's Connect API approach has shifted repeatedly over 18 months, and no timeline exists for CLH support of functionality these clients use (HR Download, Linked Tests, self-registration). Several stakeholders still lack access to the underlying tracker file.</div>
+    <div class="item"><b>Migration Blockers monitoring</b><span class="tag watch">Ongoing</span><br>
+      Gong "CLH Migration Blockers" streams logged new calls this week, including a University of the Sunshine Coast (Osmosis access issue) and a CLH planning call for Brockville General Hospital (Marshall Health Network). Box Butte data migration and a CLH Directory/Nursing Index follow-up were also scheduled this week.</div>
+  </section>
+
+  <section>
+    <h2>CLH SSO / New Client Onboarding</h2>
+    <div class="item"><b>Singing River — CLH SSO Beta</b><span class="tag watch">Pending Tessa</span><br>
+      No update this week; next steps still owned by Tessa, with Kelly Phillips recommending beta communication be validated with Product before stakeholders are told about remaining features.</div>
+    <div class="item"><b>VNA & Hospice of the Southwest Region — onboarding</b><span class="tag watch">Blocked</span><br>
+      Still waiting on contract end date to finish setup; not found in Salesforce, follow-up thread open with A. Chapman and G. Smith.</div>
+    <div class="item"><b>New account request — self-enrollment dependency</b><span class="tag watch">Watch</span><br>
+      A prospective new CLH account tied to linked tests and self-enrollment was flagged as premature given self-enrollment's current Q1 release estimate — decision on how to proceed is pending.</div>
+  </section>
+
+  <section>
+    <h2>Q3 Readiness & OKRs</h2>
+    <div class="item risk"><b>CS OKR Reporting</b><span class="tag risk">Overdue since Jul 8</span><br>
+      2026 CS June YTD OKR metrics reporting — Tessa is designated Data/Metric Owner. No confirmation of submission found this week; needs to be closed out or status confirmed.</div>
+    <div class="item"><b>Q3 Readiness: CLH & Customer Success</b><br>
+      No new update this week; prior alignment with Sara Kozelnik, Alyssa Chapman, Kelly Phillips, Elizabeth Khimani, and Gary Krisher stands.</div>
+    <div class="item"><b>CLH Q4 2026 Planning</b><span class="tag watch">Starting</span><br>
+      New Confluence page opened by Linda Pringle (and others) for Q4 2026 planning — worth a read to flag any CS/readiness dependencies early.</div>
+  </section>
+
+  <section>
+    <h2>Signals & Support Watch</h2>
+    <div class="item risk"><b>CLH Temporary Email Tracker — access gap</b><span class="tag risk">Open</span><br>
+      CXCs discovered they lack access to the Clinical Learning Trials mailbox referenced in Step 4 of the tracker. Tessa asked Alyssa Chapman (Aug 17) to grant Aaron Wood and the Customer Support team access; a related ask is extending account-creation access to 1LS agents to reduce escalations to 2LS.</div>
+    <div class="item"><b>TTP knowledge-base answer review</b><span class="tag watch">Watch</span><br>
+      Elizabeth Khimani flagged that several Transition-to-Practice (TTP) support answers haven't been reviewed since 2023, predating the move to CLH and last year's TTP content re-authoring. Content team input needed on the TTP-specific questions in the current 13-answer review batch.</div>
+    <div class="item"><b>Deep Integration & CLH Buildout Project</b><br>Confluence status report continues to be updated (Samuel Roth); worth a periodic read for cross-team integration progress.</div>
+    <div class="item"><b>CLH AI-First Spec-Driven Development (SDD) — Team Workflow</b><span class="tag watch">Watch</span><br>
+      Active discussion this week (Mike Dwyer and others) defining engineering roles and process (Intent Spec, business problem framing) for CLH feature development — worth monitoring for downstream readiness/process impacts.</div>
+  </section>
+
+  <section>
+    <h2>Upcoming / Action Items</h2>
+    <ul class="actions">
+      <li>Confirm completion of binary image/custom content migration for National Institutes of Health</li>
+      <li>Follow up with Marianna Petrovich on the notes-migration fix for Sandia Employee Health</li>
+      <li>Resolve Chatham-Kent Health Alliance loader/logging failure</li>
+      <li>Get VNA & Hospice of the Southwest Region contract end date to unblock onboarding</li>
+      <li>Confirm next steps for Singing River CLH SSO onboarding</li>
+      <li>Push for clarity on Connect-to-CLH migration strategy/timeline for the top 10 EPM + Connect clients</li>
+      <li>Confirm Customer Support/1LS access is granted to the Clinical Learning Trials mailbox</li>
+      <li>Loop in Content team on TTP-specific knowledge base answer reviews</li>
+      <li>Confirm or close out CS OKR metrics submission status (overdue since Jul 8)</li>
+      <li>Review CLH Q4 2026 planning materials for CS/readiness dependencies</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p class="muted">This is a static status report. Update the content and commit to refresh it — see README.md for instructions.</p>
+  </footer>
+</div>
+</body>
+</html>
