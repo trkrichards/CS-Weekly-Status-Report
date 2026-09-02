@@ -49,7 +49,6 @@ _Not yet entered — fill in via `index.html`._
 _Not yet entered._
 
 ### Sign Off
-- [ ] Kelly — not yet signed
 - [ ] Barry — not yet signed
 - [ ] Tessa — not yet signed
 - [ ] Laura — not yet signed
@@ -94,9 +93,10 @@ Open `index.html` in a browser (or the published GitHub Pages link). No install,
   - **Yes — add update** — reveals a text box below the row to fill in.
   - A row with an update is highlighted so it's easy to see what's changed at a glance.
 - **Other / Miscellaneous** — a catch-all for anything that isn't tied to one of the listed active projects.
+- **Lessons Learned for the Week** - what was the best thing that happened this week 
 - **Out of Office** — a line per team member for planned time out this week; leave blank if none.
 - **Recognition** — free text, per the report's own rule to recognize at least one teammate each week.
-- **Sign Off** — each of the six names (Kelly, Barry, Tessa, Laura, Andrew, Jan) has a checkbox. Checking it records that person's sign-off with a timestamp. The counter above shows how many of 6 have signed.
+- **Sign Off** — each of the six names (Barry, Tessa, Laura, Andrew, Jan) has a checkbox. Checking it records that person's sign-off with a timestamp. The counter above shows how many of 6 have signed.
 - **Download Markdown** — grabs a `.md` snapshot directly from the form, without navigating to `report.html`.
 - **Clear Draft** — wipes the current week's saved data.
 
