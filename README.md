@@ -1,5 +1,7 @@
 # Commercial Readiness Weekly Status Report
 
+Repo: [trkrichards/CS-Weekly-Status-Report](https://github.com/trkrichards/CS-Weekly-Status-Report)
+
 ## Week of 8/26 – 9/2
 
 ### Summary
@@ -77,19 +79,20 @@ Clicking **Save & View Report** on `index.html` saves your entries, then navigat
 
 **Print / Export PDF** on `index.html` does the same save-and-navigate, but opens `report.html` in a new tab with printing triggered automatically, so you get a clean printout without ever seeing the form.
 
-### Setting up View Reports
+### View Reports configuration
 
-`view-reports.html` lists files by calling the public GitHub Contents API for this repo, so it needs to know where it's hosted. Open the file and set these two constants near the top of the `<script>` block:
+`view-reports.html` lists files by calling the public GitHub Contents API for this repo — already configured for this repo:
 
 ```js
-const GITHUB_OWNER = "OWNER";   // your GitHub username or org
-const GITHUB_REPO = "REPO";     // this repo's name
+const GITHUB_OWNER = "trkrichards";
+const GITHUB_REPO = "CS-Weekly-Status-Report";
 ```
 
 A few things worth knowing about this approach:
-- It calls `https://api.github.com/repos/OWNER/REPO/contents/reports`, which works for public repos with no login. For a private repo, the browser can't authenticate to this API, so the page will show an error with a link to browse `reports/` on GitHub directly instead.
+- It calls `https://api.github.com/repos/trkrichards/CS-Weekly-Status-Report/contents/reports`, which works with no login as long as the repo is public. If the repo is private, the browser can't authenticate to this API, so the page will show an error with a link to browse `reports/` on GitHub directly instead.
 - Unauthenticated GitHub API calls are limited to 60/hour per visitor's IP — plenty for normal use, but worth knowing if it stops working temporarily after heavy testing.
 - Nothing needs to be regenerated when a new report is added — the page reflects whatever is currently committed to `reports/`.
+- If this repo is ever renamed or transferred to a different account, update `GITHUB_OWNER`/`GITHUB_REPO` at the top of `view-reports.html` to match.
 
 ### A note on where the draft data lives
 
@@ -132,9 +135,9 @@ The active projects are hardcoded in **both** `index.html` and `report.html`, in
 
 ## Publishing with GitHub Pages
 
-1. Push this folder to GitHub.
+1. Push this folder to `github.com/trkrichards/CS-Weekly-Status-Report`.
 2. **Settings → Pages** → set **Source** to "Deploy from a branch," branch `main`, folder `/ (root)` (or wherever this folder lives in the repo).
-3. GitHub publishes it at `https://<your-username>.github.io/<repo-name>/`.
+3. GitHub publishes it at `https://trkrichards.github.io/CS-Weekly-Status-Report/`.
 
 ## Files
 

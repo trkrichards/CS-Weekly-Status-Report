@@ -21,7 +21,7 @@ This matches the filename that `index.html`'s **Download Markdown** button (or `
 
 ### Option A — GitHub's web interface (no git required)
 
-1. Open this repo on GitHub and navigate into the `reports` folder (or the repo root if `reports` doesn't exist yet).
+1. Open this repo on GitHub (github.com/trkrichards/CS-Weekly-Status-Report) and navigate into the `reports` folder (or the repo root if `reports` doesn't exist yet).
 2. Click **Add file → Upload files**, then drag in the downloaded `.md` file — or click **Add file → Create new file**, type `reports/2026-08-26_to_2026-09-02.md` as the filename (typing the `/` creates the folder for you if it doesn't exist), and paste in the file's contents.
 3. Scroll down, add a commit message (e.g. "Add Week of 8/26-9/2 status report"), and click **Commit new file**.
 
