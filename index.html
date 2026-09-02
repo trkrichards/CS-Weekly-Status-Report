@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commercial Readiness Weekly Status Report</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f7f7f5;
+    color: #1a1a1a;
+    padding: 24px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  header h1 { font-size: 22px; margin: 0 0 4px 0; }
+  header .sub { color: #666; font-size: 13px; margin-bottom: 14px; }
+  .week-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; font-size: 13px; }
+  .week-row input[type=date] { padding: 5px 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
+  section {
+    background: #fff;
+    border: 1px solid #e3e2de;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  section h2 {
+    font-size: 15px;
+    margin: 0 0 12px 0;
+    color: #b5482a;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  section h3 { font-size: 13px; margin: 16px 0 8px 0; color: #888; text-transform: uppercase; letter-spacing: 0.02em; }
+  section h3:first-of-type { margin-top: 0; }
+  .readme-box {
+    background: #fdf1d6; border: 1px solid #f0dca6; border-radius: 8px;
+    padding: 12px 14px; font-size: 13px; line-height: 1.6; color: #5c4a1a;
+  }
+  .readme-box ul { margin: 6px 0 0 0; padding-left: 18px; }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px 0; }
+  label:first-of-type { margin-top: 0; }
+  .hint { color: #888; font-size: 12px; font-weight: 400; }
+  textarea, input[type=text], input[type=number], select {
+    width: 100%; font-size: 14px; font-family: inherit; padding: 8px 10px;
+    border: 1px solid #ddd; border-radius: 6px; background: #fafafa; color: #1a1a1a;
+  }
+  textarea { resize: vertical; min-height: 60px; }
+  textarea:focus, input:focus, select:focus { outline: 2px solid #b5482a33; border-color: #b5482a; }
+
+  /* Project rows */
+  .proj-group { margin-bottom: 6px; }
+  .proj-row {
+    border: 1px solid #eee; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+  }
+  .proj-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .proj-name { font-weight: 600; font-size: 14px; flex: 1 1 auto; min-width: 200px; }
+  .proj-head select { width: auto; min-width: 150px; font-size: 13px; padding: 6px 8px; }
+  .proj-row textarea { margin-top: 10px; display: none; }
+  .proj-row.has-update { border-color: #f0dca6; background: #fffdf7; }
+  .proj-row.has-update select { border-color: #b5482a; }
+
+  /* OoO */
+  .ooo-row {
+    display: flex; align-items: center; gap: 12px; padding: 8px 10px;
+    border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; font-size: 14px;
+  }
+  .ooo-row .name { font-weight: 600; min-width: 70px; }
+  .ooo-row input { flex: 1; }
+
+  /* Sign off */
+  .signoff-list { display: flex; flex-direction: column; gap: 8px; }
+  .signoff-row {
+    display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+    border: 1px solid #eee; border-radius: 8px; font-size: 14px;
+  }
+  .signoff-row input[type=checkbox] { width: 18px; height: 18px; }
+  .signoff-row .name { font-weight: 600; min-width: 70px; }
+  .signoff-row .ts { color: #888; font-size: 12px; margin-left: auto; }
+  .signoff-progress { font-size: 13px; color: #666; margin-bottom: 10px; }
+
+  .actions { display: flex; gap: 10px; margin: 20px 0 40px 0; flex-wrap: wrap; }
+  button {
+    font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: 8px;
+    border: 1px solid transparent; cursor: pointer;
+  }
+  button.primary { background: #b5482a; color: #fff; }
+  button.primary:hover { background: #9c3c22; }
+  button.secondary { background: #fff; border-color: #ddd; color: #1a1a1a; }
+  button.secondary:hover { background: #f0f0ee; }
+  button.danger { background: #fff; border-color: #f0c9c0; color: #a3341c; }
+  #saveStatus { font-size: 12px; color: #888; align-self: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Commercial Readiness Weekly Status Report</h1>
+    <div class="sub">Tessa Richards, Customer Readiness Manager</div>
+  </header>
+
+  <div class="week-row">
+    <b>Week of</b>
+    <input type="date" id="weekStart" value="2026-08-26">
+    <span>&ndash;</span>
+    <input type="date" id="weekEnd" value="2026-09-02">
+    <span id="saveStatus"></span>
+  </div>
+
+  <section>
+    <h2>Read Me First</h2>
+    <div class="readme-box">
+      <ul>
+        <li>Add one summary bullet point (top of document) that captures the most important highlight from your week.</li>
+        <li>For each active project below, mark whether you have an update. Selecting <b>Yes</b> opens a text box to fill in.</li>
+        <li>When possible, recognize at least one member of the team for doing something noteworthy. You can recognize yourself since we are such a small team.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Summary <span class="hint">(mandatory — one bullet)</span></h2>
+    <textarea id="summary" placeholder="Summarize, in one bullet point, the most important highlight from your team this week."></textarea>
+  </section>
+
+  <section>
+    <h2>Active Projects</h2>
+    <div class="hint" style="margin-bottom:10px;">Only currently active initiatives are listed. For each, choose whether you have an update this week.</div>
+    <div id="projectGroups"></div>
+
+    <label>Other / Miscellaneous <span class="hint">(anything that doesn't fit one of the projects above — Gong, CS Standup, ADA file conversion, etc.)</span></label>
+    <textarea id="misc" placeholder="No updates"></textarea>
+  </section>
+
+  <section>
+    <h2>Out of Office</h2>
+    <div class="hint" style="margin-bottom:10px;">List any planned time out this week (leave blank if none).</div>
+    <div id="oooList"></div>
+  </section>
+
+  <section>
+    <h2>Recognition</h2>
+    <textarea id="recognition" placeholder="Recognize at least one team member for something noteworthy this week."></textarea>
+  </section>
+
+  <section>
+    <h2>Sign Off</h2>
+    <div class="signoff-progress" id="signoffProgress">0 of 6 signed off</div>
+    <div class="signoff-list" id="signoffList"></div>
+  </section>
+
+  <div class="actions">
+    <button class="primary" id="saveBtn">Save &amp; View Report</button>
+    <button class="secondary" id="mdBtn">Download Markdown</button>
+    <button class="secondary" id="printBtn">Print / Export PDF</button>
+    <button class="danger" id="clearBtn">Clear Draft</button>
+  </div>
+  <div class="hint" style="margin-top:-30px;margin-bottom:30px;">"Save &amp; View Report" saves your entries, then opens <code>report.html</code> — a separate page in this repo — showing the full report with your changes.</div>
+</div>
+
+<script>
+const SIGNERS = ["Kelly", "Barry", "Tessa", "Laura", "Andrew", "Jan"];
+
+// Only ACTIVE projects, grouped as in the Projects & Status table.
+// NOTE: this array is duplicated in report.html — keep both in sync.
+const ACTIVE_PROJECTS = [
+  { category: "Physician and Pharmacist Initiatives", items: [
+    "ClinicalKey Unified Vision (CK+?)",
+    "ClinicalKey for Nursing Unified Vision (CKN+?)",
+    "ClinicalKey (CK) Physician BAU",
+    "CK AI BAU",
+    "CPCK BAU",
+    "CK for Medical Schools BAU",
+    "CK Test Prep BAU",
+    "NEOID LMS Access CK Student",
+  ]},
+  { category: "Nursing and Patient Education Initiatives", items: [
+    "Clinical Learning Hub",
+    "CK Student NOAM/Clinical Cases BAU",
+    "CK Nursing BAU",
+    "Patient Pass/PE Products BAU",
+    "Clinical eLearning BAU",
+  ]},
+  { category: "Specialist Solution Initiatives", items: [
+    "ClinicalPath BAU",
+    "ClinicalPath Provider Reports",
+    "PSS BAU",
+  ]},
+  { category: "Strategic/Corporate Initiatives", items: [
+    "eLearning Localization",
+  ]},
+  { category: "Miscellaneous", items: [
+    "Project Phoenix Admin Console",
+  ]},
+];
+
+function draftKey(week) {
+  return "crw-draft-" + (week || document.getElementById("weekStart").value);
+}
+
+// ---- Build Active Projects ----
+function buildProjects() {
+  const wrap = document.getElementById("projectGroups");
+  wrap.innerHTML = ACTIVE_PROJECTS.map((group, gi) => `
+    <div class="proj-group">
+      <h3>${group.category}</h3>
+      ${group.items.map((name, ii) => {
+        const id = `proj-${gi}-${ii}`;
+        return `
+        <div class="proj-row" id="row-${id}">
+          <div class="proj-head">
+            <span class="proj-name">${name}</span>
+            <select id="sel-${id}" data-target="text-${id}">
+              <option value="no" selected>No updates</option>
+              <option value="yes">Yes — add update</option>
+            </select>
+          </div>
+          <textarea id="text-${id}" placeholder="What happened with ${name} this week?"></textarea>
+        </div>`;
+      }).join("")}
+    </div>
+  `).join("");
+
+  wrap.querySelectorAll("select[id^='sel-']").forEach(sel => {
+    sel.addEventListener("change", () => applyProjectToggle(sel));
+  });
+}
+
+function applyProjectToggle(sel) {
+  const textId = sel.dataset.target;
+  const textEl = document.getElementById(textId);
+  const row = sel.closest(".proj-row");
+  if (sel.value === "yes") {
+    textEl.style.display = "block";
+    row.classList.add("has-update");
+  } else {
+    textEl.style.display = "none";
+    row.classList.remove("has-update");
+  }
+}
+
+function allProjectFields() {
+  const fields = [];
+  ACTIVE_PROJECTS.forEach((group, gi) => {
+    group.items.forEach((name, ii) => {
+      fields.push({ id: `proj-${gi}-${ii}`, name, category: group.category });
+    });
+  });
+  return fields;
+}
+
+// ---- Out of Office ----
+function buildOoo() {
+  const wrap = document.getElementById("oooList");
+  wrap.innerHTML = SIGNERS.map(name => `
+    <div class="ooo-row">
+      <span class="name">${name}</span>
+      <input type="text" id="ooo-${name}" placeholder="e.g. 9/1 (all day), 9/2 (half day)">
+    </div>
+  `).join("");
+}
+
+// ---- Sign Off ----
+function buildSignoff() {
+  const list = document.getElementById("signoffList");
+  list.innerHTML = SIGNERS.map(name => `
+    <div class="signoff-row">
+      <input type="checkbox" id="sign-${name}" data-name="${name}">
+      <span class="name">${name}</span>
+      <span class="ts" id="ts-${name}"></span>
+    </div>
+  `).join("");
+  SIGNERS.forEach(name => {
+    document.getElementById(`sign-${name}`).addEventListener("change", (e) => {
+      const tsEl = document.getElementById(`ts-${name}`);
+      if (e.target.checked) {
+        const now = new Date();
+        tsEl.dataset.iso = now.toISOString();
+        tsEl.textContent = "Signed " + now.toLocaleString(undefined, { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" });
+      } else {
+        tsEl.textContent = "";
+        tsEl.dataset.iso = "";
+      }
+      updateSignoffProgress();
+      saveDraft();
+    });
+  });
+}
+
+function updateSignoffProgress() {
+  const checked = SIGNERS.filter(n => document.getElementById(`sign-${n}`).checked).length;
+  document.getElementById("signoffProgress").textContent = `${checked} of ${SIGNERS.length} signed off`;
+}
+
+// ---- Draft save / load ----
+function saveDraft() {
+  const data = { weekStart: document.getElementById("weekStart").value, weekEnd: document.getElementById("weekEnd").value };
+  data.summary = document.getElementById("summary").value;
+  data.misc = document.getElementById("misc").value;
+  data.recognition = document.getElementById("recognition").value;
+
+  data.projects = {};
+  allProjectFields().forEach(f => {
+    data.projects[f.id] = {
+      status: document.getElementById(`sel-${f.id}`).value,
+      text: document.getElementById(`text-${f.id}`).value
+    };
+  });
+
+  data.ooo = {};
+  SIGNERS.forEach(name => { data.ooo[name] = document.getElementById(`ooo-${name}`).value; });
+
+  data.signoff = {};
+  SIGNERS.forEach(name => {
+    const cb = document.getElementById(`sign-${name}`);
+    data.signoff[name] = { checked: cb.checked, iso: document.getElementById(`ts-${name}`).dataset.iso || "" };
+  });
+
+  localStorage.setItem(draftKey(), JSON.stringify(data));
+  document.getElementById("saveStatus").textContent = "Saved " + new Date().toLocaleTimeString();
+  return data;
+}
+
+function loadDraft() {
+  const raw = localStorage.getItem(draftKey());
+  if (!raw) return;
+  let data;
+  try { data = JSON.parse(raw); } catch (e) { return; }
+
+  if (data.summary !== undefined) document.getElementById("summary").value = data.summary;
+  if (data.misc !== undefined) document.getElementById("misc").value = data.misc;
+  if (data.recognition !== undefined) document.getElementById("recognition").value = data.recognition;
+
+  if (data.projects) {
+    allProjectFields().forEach(f => {
+      const saved = data.projects[f.id];
+      if (!saved) return;
+      const sel = document.getElementById(`sel-${f.id}`);
+      const textEl = document.getElementById(`text-${f.id}`);
+      sel.value = saved.status || "no";
+      textEl.value = saved.text || "";
+      applyProjectToggle(sel);
+    });
+  }
+
+  if (data.ooo) {
+    SIGNERS.forEach(name => {
+      const el = document.getElementById(`ooo-${name}`);
+      if (data.ooo[name] !== undefined) el.value = data.ooo[name];
+    });
+  }
+
+  if (data.signoff) {
+    SIGNERS.forEach(name => {
+      const s = data.signoff[name];
+      if (s && s.checked) {
+        document.getElementById(`sign-${name}`).checked = true;
+        const tsEl = document.getElementById(`ts-${name}`);
+        tsEl.dataset.iso = s.iso;
+        if (s.iso) {
+          tsEl.textContent = "Signed " + new Date(s.iso).toLocaleString(undefined, { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" });
+        }
+      }
+    });
+    updateSignoffProgress();
+  }
+}
+
+function clearDraft() {
+  if (!confirm("Clear this week's draft? This cannot be undone.")) return;
+  localStorage.removeItem(draftKey());
+  location.reload();
+}
+
+// ---- Markdown export (for the on-page Download Markdown button) ----
+function buildMarkdown() {
+  const ws = document.getElementById("weekStart").value, we = document.getElementById("weekEnd").value;
+  let md = `# Commercial Readiness Weekly Status Report\n\n## Week of ${ws} – ${we}\n\n`;
+  md += `## Summary\n${document.getElementById("summary").value || "_(none entered)_"}\n\n`;
+
+  md += `## Active Projects\n`;
+  ACTIVE_PROJECTS.forEach((group, gi) => {
+    md += `\n**${group.category}**\n`;
+    group.items.forEach((name, ii) => {
+      const id = `proj-${gi}-${ii}`;
+      const status = document.getElementById(`sel-${id}`).value;
+      const text = document.getElementById(`text-${id}`).value.trim();
+      md += status === "yes" && text
+        ? `- **${name}**: ${text}\n`
+        : `- **${name}**: No updates\n`;
+    });
+  });
+  md += `\n**Other / Miscellaneous**\n${document.getElementById("misc").value.trim() || "No updates"}\n`;
+
+  md += `\n## Out of Office\n`;
+  SIGNERS.forEach(name => {
+    const val = document.getElementById(`ooo-${name}`).value.trim();
+    md += `- ${name}: ${val || "None"}\n`;
+  });
+
+  md += `\n## Recognition\n${document.getElementById("recognition").value.trim() || "_(none entered)_"}\n`;
+
+  md += `\n## Sign Off\n`;
+  SIGNERS.forEach(name => {
+    const cb = document.getElementById(`sign-${name}`);
+    const tsEl = document.getElementById(`ts-${name}`);
+    md += cb.checked
+      ? `- [x] ${name} — signed ${tsEl.dataset.iso ? new Date(tsEl.dataset.iso).toLocaleString() : ""}\n`
+      : `- [ ] ${name} — not yet signed\n`;
+  });
+  return md;
+}
+
+function downloadMarkdown() {
+  const md = buildMarkdown();
+  const ws = document.getElementById("weekStart").value, we = document.getElementById("weekEnd").value;
+  const blob = new Blob([md], { type: "text/markdown" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `Commercial-Readiness-Weekly-Status-${ws}_to_${we}.md`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+// ---- Wire up ----
+document.addEventListener("DOMContentLoaded", () => {
+  buildProjects();
+  buildOoo();
+  buildSignoff();
+  loadDraft();
+
+  document.querySelectorAll("textarea, input[type=text], input[type=date]").forEach(el => {
+    el.addEventListener("input", saveDraft);
+  });
+  document.querySelectorAll("select[id^='sel-']").forEach(sel => {
+    sel.addEventListener("change", saveDraft);
+  });
+
+  document.getElementById("mdBtn").addEventListener("click", downloadMarkdown);
+  document.getElementById("clearBtn").addEventListener("click", clearDraft);
+
+  // Save & View Report — saves the draft, then navigates to the standalone
+  // report page (report.html) in this repo, passing the selected week.
+  document.getElementById("saveBtn").addEventListener("click", () => {
+    saveDraft();
+    const week = document.getElementById("weekStart").value;
+    location.href = "report.html?week=" + encodeURIComponent(week);
+  });
+
+  // Print / Export PDF — saves, then opens the report page in a new tab
+  // and triggers the browser print dialog there (clean, form-free output).
+  document.getElementById("printBtn").addEventListener("click", () => {
+    saveDraft();
+    const week = document.getElementById("weekStart").value;
+    window.open("report.html?week=" + encodeURIComponent(week) + "&print=1", "_blank");
+  });
+
+  document.getElementById("weekStart").addEventListener("change", () => { loadDraft(); saveDraft(); });
+});
+</script>
+</body>
+</html>
