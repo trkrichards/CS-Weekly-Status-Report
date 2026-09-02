@@ -49,6 +49,7 @@ _Not yet entered — fill in via `index.html`._
 _Not yet entered._
 
 ### Sign Off
+- [ ] Kelly — not yet signed
 - [ ] Barry — not yet signed
 - [ ] Tessa — not yet signed
 - [ ] Laura — not yet signed
@@ -65,22 +66,38 @@ A fillable version of the Commercial Readiness Weekly Status Report, organized a
 
 Closed, cancelled, and paused initiatives from the source report aren't listed individually — anything outside the active project list (e.g. Gong, CS Customer Centric Standup, ADA file conversion) goes in the **Other / Miscellaneous** field.
 
-## How the pages work together
+## Pages in this repo
 
-- **`index.html`** — the fillable form. This is where you enter updates.
-- **`report.html`** — a separate, read-only report page. This is where you (or anyone) view the finished report.
+- **`index.html`** — the fillable form. Where you enter updates.
+- **`report.html`** — a read-only view of the report you just saved, for one specific week.
+- **`view-reports.html`** — browses every report that's been committed to `reports/`, pulled live from GitHub. Click a report to expand a rendered preview, or open it raw / on GitHub.
 - **`reports/`** — the archive folder for finished, signed-off weekly reports as Markdown files (see `reports/README.md`).
 
-Clicking **Save & View Report** on `index.html` saves your entries, then navigates to `report.html?week=<the selected week>`, which reads that saved data and renders it as a clean report — no form controls, just the content. Use **← Back to Edit** on `report.html` to return to the form.
+Clicking **Save & View Report** on `index.html` saves your entries, then navigates to `report.html?week=<the selected week>`, which reads that saved data and renders it as a clean report — no form controls, just the content. Use **← Back to Edit** on `report.html` to return to the form, or **View Reports** to see the archive.
 
 **Print / Export PDF** on `index.html` does the same save-and-navigate, but opens `report.html` in a new tab with printing triggered automatically, so you get a clean printout without ever seeing the form.
 
-### A note on where the data lives
+### Setting up View Reports
 
-There's no backend or database here — everything is saved to the browser's `localStorage`, keyed by the week (e.g. `crw-draft-2026-08-26`). That means:
+`view-reports.html` lists files by calling the public GitHub Contents API for this repo, so it needs to know where it's hosted. Open the file and set these two constants near the top of the `<script>` block:
+
+```js
+const GITHUB_OWNER = "OWNER";   // your GitHub username or org
+const GITHUB_REPO = "REPO";     // this repo's name
+```
+
+A few things worth knowing about this approach:
+- It calls `https://api.github.com/repos/OWNER/REPO/contents/reports`, which works for public repos with no login. For a private repo, the browser can't authenticate to this API, so the page will show an error with a link to browse `reports/` on GitHub directly instead.
+- Unauthenticated GitHub API calls are limited to 60/hour per visitor's IP — plenty for normal use, but worth knowing if it stops working temporarily after heavy testing.
+- Nothing needs to be regenerated when a new report is added — the page reflects whatever is currently committed to `reports/`.
+
+### A note on where the draft data lives
+
+There's no backend or database for the *in-progress* form — everything is saved to the browser's `localStorage`, keyed by the week (e.g. `crw-draft-2026-08-26`). That means:
 
 - Draft data is per-browser, not shared between teammates. Whoever is the primary editor for the week should be the one filling in `index.html` and generating the report.
 - `localStorage` is shared between `index.html` and `report.html` as long as they're opened from the **same web address** (same domain, e.g. both on the same GitHub Pages site). If you open the files directly from your computer (double-clicking, `file://` links) some browsers isolate local storage per file and `report.html` may not find the data — publish via GitHub Pages (below) for reliable behavior, or run a simple local server if testing before publishing.
+- Once a report is downloaded and committed to `reports/`, it's no longer dependent on `localStorage` at all — that's the point of the archive, and why `view-reports.html` reads from GitHub instead.
 
 ## Using the form
 
@@ -93,10 +110,9 @@ Open `index.html` in a browser (or the published GitHub Pages link). No install,
   - **Yes — add update** — reveals a text box below the row to fill in.
   - A row with an update is highlighted so it's easy to see what's changed at a glance.
 - **Other / Miscellaneous** — a catch-all for anything that isn't tied to one of the listed active projects.
-- **Lessons Learned for the Week** - what was the best thing that happened this week 
 - **Out of Office** — a line per team member for planned time out this week; leave blank if none.
 - **Recognition** — free text, per the report's own rule to recognize at least one teammate each week.
-- **Sign Off** — each of the six names (Barry, Tessa, Laura, Andrew, Jan) has a checkbox. Checking it records that person's sign-off with a timestamp. The counter above shows how many of 6 have signed.
+- **Sign Off** — each of the six names (Kelly, Barry, Tessa, Laura, Andrew, Jan) has a checkbox. Checking it records that person's sign-off with a timestamp. The counter above shows how many of 6 have signed.
 - **Download Markdown** — grabs a `.md` snapshot directly from the form, without navigating to `report.html`.
 - **Clear Draft** — wipes the current week's saved data.
 
@@ -107,7 +123,8 @@ Once everyone has signed off:
 1. Click **Save & View Report** for a final read-through on `report.html`.
 2. Click **Download Markdown** (available on both pages) to generate a `.md` file of the completed report.
 3. Add that file to the `reports/` folder in this repo — see `reports/README.md` for the naming convention and step-by-step instructions (GitHub web UI or git command line) for committing it.
-4. Optionally, also replace the report block at the top of this README with the same content, so anyone landing on the repo sees the latest report first.
+4. It will now show up on `view-reports.html` automatically.
+5. Optionally, also replace the report block at the top of this README with the same content, so anyone landing on the repo sees the latest report first.
 
 ## Updating the active project list
 
@@ -123,5 +140,6 @@ The active projects are hardcoded in **both** `index.html` and `report.html`, in
 
 - `index.html` — the fillable form.
 - `report.html` — the read-only report view that `index.html` links to.
+- `view-reports.html` — browses the full archive of committed reports.
 - `reports/` — archive of finished, signed-off weekly reports (Markdown files).
 - `README.md` — this file (current report + usage instructions).

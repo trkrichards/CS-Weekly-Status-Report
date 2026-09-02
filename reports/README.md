@@ -10,13 +10,14 @@ reports/YYYY-MM-DD_to_YYYY-MM-DD.md
 
 Example: `reports/2026-08-26_to_2026-09-02.md`
 
-This matches the filename that `index.html`'s **Download Markdown** button (or `report.html`'s copy of the same button) generates automatically, so you can drop the downloaded file straight into this folder without renaming it.
+This matches the filename that `index.html`'s **Download Markdown** button (or `report.html`'s copy of the same button) generates automatically, so you can drop the downloaded file straight into this folder without renaming it. It's also what `view-reports.html` expects in order to derive each report's "Week of" label.
 
 ## Adding a week's report
 
 1. On `index.html`, fill out the form, get everyone signed off, then click **Save & View Report**.
 2. On `report.html`, click **Download Markdown** to save the `.md` file to your computer.
 3. Add that file to this `reports/` folder and commit it (see the two methods below).
+4. Once pushed, it shows up automatically on `view-reports.html` — no other setup needed.
 
 ### Option A — GitHub's web interface (no git required)
 

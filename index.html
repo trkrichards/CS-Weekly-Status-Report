@@ -17,6 +17,8 @@
   .wrap { max-width: 920px; margin: 0 auto; }
   header h1 { font-size: 22px; margin: 0 0 4px 0; }
   header .sub { color: #666; font-size: 13px; margin-bottom: 14px; }
+  header .sub a { color: #b5482a; text-decoration: none; }
+  header .sub a:hover { text-decoration: underline; }
   .week-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; font-size: 13px; }
   .week-row input[type=date] { padding: 5px 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
   section {
@@ -98,7 +100,7 @@
 <div class="wrap">
   <header>
     <h1>Commercial Readiness Weekly Status Report</h1>
-    <div class="sub">Tessa Richards, Customer Readiness Manager</div>
+    <div class="sub">Tessa Richards, Customer Readiness Manager &nbsp;|&nbsp; <a href="view-reports.html">View Reports →</a></div>
   </header>
 
   <div class="week-row">
@@ -157,7 +159,7 @@
     <button class="secondary" id="printBtn">Print / Export PDF</button>
     <button class="danger" id="clearBtn">Clear Draft</button>
   </div>
-  <div class="hint" style="margin-top:-30px;margin-bottom:30px;">"Save &amp; View Report" saves your entries, then opens <code>report.html</code> — a separate page in this repo — showing the full report with your changes.</div>
+  <div class="hint" style="margin-top:-30px;margin-bottom:30px;">"Save &amp; View Report" saves your entries, then opens <code>report.html</code> — a separate page in this repo — showing the full report with your changes. Once a week's report is finished and committed to <code>reports/</code>, find it again anytime via <a href="view-reports.html">View Reports</a>.</div>
 </div>
 
 <script>
